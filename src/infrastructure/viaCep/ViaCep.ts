@@ -1,9 +1,9 @@
 import axios, { AxiosInstance } from "axios";
 import { GeoApiInterface } from "./GeoApiInterface";
 
-export class ViaCep implements GeoApiInterface{
+export class ViaCep implements GeoApiInterface {
     endpoint: string = 'https://viacep.com.br/';
-    private api: AxiosInstance;
+    private api: AxiosInstance
 
     constructor(){
         this.api = axios.create({
@@ -12,8 +12,9 @@ export class ViaCep implements GeoApiInterface{
     }
 
     async getAddress(bodyValue: string) {
+        // this.api.get('ws/' + bodyValue + 'json/')
         let response = await this.api.get(`ws/${bodyValue}/json/`)
-         return response.data;
+        return response.data
     }
 }
 
