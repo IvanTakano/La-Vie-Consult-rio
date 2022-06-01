@@ -7,15 +7,16 @@ export class PsicologoService{
     async registerPsicologo(data: any){
         const { senha, cep } = data;
 
-        const fullAddress = await viaCepApi.getAddress(cep);
         
         const newSenha = bcrypt.hashSync(senha, 10);
 
         const newPsicologo = await Psicologos.create({
             ...data,
             senha: newSenha,
-            bairro: this.getBairro(cep)
+            bairro: await this.getBairro(cep)
       });
+
+      return newPsicologo;
     }
 
     async getBairro(cep: string){
